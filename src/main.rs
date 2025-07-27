@@ -1,23 +1,31 @@
-// Marca a função main com asyncrona e usa o runtime async-std
+mod handlers;
+mod models;
+mod state;
+
+use handlers::create::create_data;
+// use handlers::delete::delete_data;
+// use handlers::read::{read_all_data, read_data};
+// use handlers::update::update_data;
+
 #[async_std::main]
 async fn main() -> tide::Result<()> {
-    // Define o endereço a porta onde a API vai rodar
+    // Cria o estado global da aplicação
+    let state = state::new_state();
+
+    // Cria o app Tide e associa o estado
+    let mut app = tide::with_state(state);
+
+    // Define as rotas CRUD
+    app.at("/data").post(create_data); // Cria
+    // app.at("/data").get(read_all_data); // Ler todos
+    // app.at("/data/:id").get(read_data); // Ler um
+    // app.at("/data/:id").put(update_data); // Atualiza
+    // app.at("/data/:id").delete(delete_data); // Deleta
+
     let addr = "127.0.0.1:8080";
+    println!("Servidor CRUD rodando em: http://{addr}");
 
-    println!("Servidor Tide Rodando em: http://{}", addr);
-
-    // Cria uma nova aplicação Tide
-    let mut app = tide::new();
-
-    // Define uma Rota Get para o caminho raiz ("/")
-    // Quando a requisição Get chega em "/", ela responde com "Hello World!"
-    app.at("/").get(|_| async {
-        Ok("Hello, world!")
-    });
-
-    // Inicia o servidor Tide e o faz escutar as requisições no endereço definido
+    // Inicia Servidor
     app.listen(addr).await?;
-
-    // Retorna vazio (sucesso)
     Ok(())
 }
