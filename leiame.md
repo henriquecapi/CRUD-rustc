@@ -26,3 +26,17 @@ rustc main.rs
 | `cargo check`   | Sim      | Não              | Não      | Verificar erros rapidamente enquanto codifica.      |
 | `cargo build`   | Sim      | Sim              | Não      | Preparar o programa para uso ou distribuição.       |
 | `cargo run`     | Sim      | Sim              | Sim      | Compilar e testar o resultado do programa na hora.  |
+
+# Criar conta no Crates.io
+- Acesse https://crates.io e crie uma conta
+- Gere um token de API em Account Settings > API Tokens
+- Autentique se localmente (cargo login <seu-token>)
+
+# Publicar no Crates.io
+- verificar antes de publicar
+cargo package
+- gPublicar no Crates.io
+cargo publish
+
+Meu repositório no Crates.io:
+https://crates.io/crates/CRUD-henriquecapi
