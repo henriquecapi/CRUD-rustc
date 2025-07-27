@@ -3,7 +3,7 @@ name = "crud_henriquecapi"
 version = "0.1.0"
 edition = "2024"
 description = "CRUD em Rust utilizando o framework web Tide"
-licence = "MIT"
+license = "MIT"
 
 [dependencies]
 async-std = { version = "1.12.0", features = ["attributes"] }
